@@ -1,37 +1,37 @@
 /** @jsx figma.widget.h */
 
-import { once, showUI } from '@create-figma-plugin/utilities'
+import { once, showUI } from "@create-figma-plugin/utilities";
 
-const { widget } = figma
-const { AutoLayout, Text, useSyncedState, usePropertyMenu } = widget
+const { widget } = figma;
+const { AutoLayout, Text, useSyncedState, usePropertyMenu } = widget;
 
 export default function () {
-  widget.register(Notepad)
+  widget.register(Connectfive);
 }
 
-function Notepad() {
-  const [text, setText] = useSyncedState('text', 'Hello\nWidgets')
+function Connectfive() {
+  const [text, setText] = useSyncedState("text", "Hello\nWidgets");
   const items: Array<WidgetPropertyMenuItem> = [
     {
-      itemType: 'action',
-      propertyName: 'edit',
-      tooltip: 'Edit'
-    }
-  ]
+      itemType: "action",
+      propertyName: "edit",
+      tooltip: "Edit",
+    },
+  ];
   async function onChange({
-    propertyName
+    propertyName,
   }: WidgetPropertyEvent): Promise<void> {
     await new Promise<void>(function (resolve: () => void): void {
-      if (propertyName === 'edit') {
-        showUI({ height: 144, width: 240 }, { text })
-        once('UPDATE_TEXT', function (text: string): void {
-          setText(text)
-          resolve()
-        })
+      if (propertyName === "edit") {
+        showUI({ height: 144, width: 240 }, { text });
+        once("UPDATE_TEXT", function (text: string): void {
+          setText(text);
+          resolve();
+        });
       }
-    })
+    });
   }
-  usePropertyMenu(items, onChange)
+  usePropertyMenu(items, onChange);
   return (
     <AutoLayout
       direction="horizontal"
@@ -40,7 +40,7 @@ function Notepad() {
         color: { a: 0.2, b: 0, g: 0, r: 0 },
         offset: { x: 0, y: 0 },
         spread: 2,
-        type: 'drop-shadow'
+        type: "drop-shadow",
       }}
       fill="#FFFFFF"
       height="hug-contents"
@@ -54,14 +54,14 @@ function Notepad() {
         horizontalAlignItems="start"
         verticalAlignItems="start"
       >
-        {text.split('\n').map((line) => {
+        {text.split("\n").map((line) => {
           return line ? (
             <Text fontSize={12} horizontalAlignText="left" width="fill-parent">
               {line}
             </Text>
-          ) : null
+          ) : null;
         })}
       </AutoLayout>
     </AutoLayout>
-  )
+  );
 }
