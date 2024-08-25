@@ -1,9 +1,10 @@
 /** @jsx figma.widget.h */
 
 import { once, showUI } from "@create-figma-plugin/utilities";
+import { Board } from "./components/Board";
 
 const { widget } = figma;
-const { AutoLayout, Text, useSyncedState, usePropertyMenu } = widget;
+const { useSyncedState, usePropertyMenu } = widget;
 
 export default function () {
   widget.register(Connectfive);
@@ -32,36 +33,5 @@ function Connectfive() {
     });
   }
   usePropertyMenu(items, onChange);
-  return (
-    <AutoLayout
-      direction="horizontal"
-      effect={{
-        blur: 2,
-        color: { a: 0.2, b: 0, g: 0, r: 0 },
-        offset: { x: 0, y: 0 },
-        spread: 2,
-        type: "drop-shadow",
-      }}
-      fill="#FFFFFF"
-      height="hug-contents"
-      horizontalAlignItems="center"
-      padding={8}
-      spacing={12}
-      verticalAlignItems="center"
-    >
-      <AutoLayout
-        direction="vertical"
-        horizontalAlignItems="start"
-        verticalAlignItems="start"
-      >
-        {text.split("\n").map((line) => {
-          return line ? (
-            <Text fontSize={12} horizontalAlignText="left" width="fill-parent">
-              {line}
-            </Text>
-          ) : null;
-        })}
-      </AutoLayout>
-    </AutoLayout>
-  );
+  return <Board />;
 }
