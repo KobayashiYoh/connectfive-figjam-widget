@@ -54,7 +54,10 @@ const Tile = ({
       onClick={handleClick}
       fill={{
         type: "solid",
-        color: { r: 0.89, g: 0.64, b: 0.34, a: 1 }, // Background color of the tile
+        color: { r: 0.89, g: 0.64, b: 0.34, a: 1 },
+      }}
+      hoverStyle={{
+        fill: { r: 0.99, g: 0.84, b: 0.74, a: 1 },
       }}
     >
       {renderTile(status)}
