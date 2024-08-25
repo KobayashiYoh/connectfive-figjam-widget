@@ -20,8 +20,8 @@
       "figjam"
     ],
     "containsWidget": true,
-    "id": "notepad",
-    "name": "Notepad",
+    "id": "connectfive",
+    "name": "Connectfive",
     "main": "src/main.tsx",
     "ui": "src/ui.tsx"
   }
