@@ -9,8 +9,13 @@ const { widget } = figma;
 const { AutoLayout, Text } = widget;
 
 export const Board = () => {
-  const { tileStatuses, blackResultText, whiteResultText, handleTileClick } =
-    useGame();
+  const {
+    tileStatuses,
+    blackResultText,
+    whiteResultText,
+    handleTileClick,
+    resetGame,
+  } = useGame();
 
   const tileSize = 42;
   const boardSize = boardLength * tileSize + 32;
@@ -60,7 +65,7 @@ export const Board = () => {
         verticalAlignItems="center"
       >
         <AutoLayout
-          onClick={() => {}}
+          onClick={resetGame}
           direction="horizontal"
           horizontalAlignItems="center"
           verticalAlignItems="center"

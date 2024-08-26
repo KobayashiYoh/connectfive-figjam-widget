@@ -29,6 +29,14 @@ export const useGame = () => {
     setIsBlackTurn(!isBlackTurn);
   };
 
+  const resetGame = () => {
+    setTileStatuses(initializeTileStatuses);
+    setIsBlackTurn(true);
+    setIsGameOver(false);
+    setBlackResultText("");
+    setWhiteResultText("");
+  };
+
   const handleTileClick = (rowIndex: number, colIndex: number) => {
     if (isGameOver) {
       return;
@@ -57,5 +65,11 @@ export const useGame = () => {
     }
   };
 
-  return { tileStatuses, blackResultText, whiteResultText, handleTileClick };
+  return {
+    tileStatuses,
+    blackResultText,
+    whiteResultText,
+    handleTileClick,
+    resetGame,
+  };
 };
