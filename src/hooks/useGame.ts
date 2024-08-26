@@ -34,8 +34,6 @@ export const useGame = () => {
       return;
     }
 
-    console.log(`Tile clicked at ${rowIndex}, ${colIndex}`);
-
     const selectedStatus: TileStatus = tileStatuses[rowIndex][colIndex];
     if (isNotEmpty(selectedStatus)) {
       return;
@@ -49,10 +47,11 @@ export const useGame = () => {
     if (checkWin(newTileStatuses, rowIndex, colIndex, tileStatus)) {
       setBlackResultText(`${isBlackTurn ? "Winner!" : "loser…"}`);
       setWhiteResultText(`${isBlackTurn ? "loser…" : "Winner!"}`);
+      setIsGameOver(true);
     } else if (areAllTilesFilled(newTileStatuses)) {
-      console.log("引き分け");
       setBlackResultText("draw");
       setWhiteResultText("draw");
+      setIsGameOver(true);
     } else {
       switchTurn();
     }
