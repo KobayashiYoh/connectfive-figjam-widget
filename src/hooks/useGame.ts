@@ -16,6 +16,14 @@ export const useGame = () => {
   );
   const [isBlackTurn, setIsBlackTurn] = useSyncedState("isBlackTurn", true);
   const [isGameOver, setIsGameOver] = useSyncedState("isGameOver", false);
+  const [blackResultText, setBlackResultText] = useSyncedState(
+    "blackResultText",
+    ""
+  );
+  const [whiteResultText, setWhiteResultText] = useSyncedState(
+    "whiteResultText",
+    ""
+  );
 
   const switchTurn = () => {
     setIsBlackTurn(!isBlackTurn);
@@ -39,13 +47,16 @@ export const useGame = () => {
 
     const tileStatus = currentTurnStatus(isBlackTurn);
     if (checkWin(newTileStatuses, rowIndex, colIndex, tileStatus)) {
-      console.log(`${isBlackTurn ? "黒" : "白"}の勝ちです！`);
+      setBlackResultText(`${isBlackTurn ? "Winner!" : "loser…"}`);
+      setWhiteResultText(`${isBlackTurn ? "loser…" : "Winner!"}`);
     } else if (areAllTilesFilled(newTileStatuses)) {
       console.log("引き分け");
+      setBlackResultText("draw");
+      setWhiteResultText("draw");
     } else {
       switchTurn();
     }
   };
 
-  return { tileStatuses, handleTileClick };
+  return { tileStatuses, blackResultText, whiteResultText, handleTileClick };
 };

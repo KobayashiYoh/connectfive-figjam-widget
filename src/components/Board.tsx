@@ -9,7 +9,8 @@ const { widget } = figma;
 const { AutoLayout } = widget;
 
 export const Board = () => {
-  const { tileStatuses, handleTileClick } = useGame();
+  const { tileStatuses, blackResultText, whiteResultText, handleTileClick } =
+    useGame();
 
   const tileSize = 42;
   const boardSize = boardLength * tileSize + 32;
@@ -52,7 +53,7 @@ export const Board = () => {
       verticalAlignItems="center"
       padding={10}
     >
-      <PlayerBoard resultText="Winner!" isBlack={true} />
+      <PlayerBoard resultText={blackResultText} isBlack={true} />
       <AutoLayout
         direction="vertical"
         horizontalAlignItems="center"
@@ -65,7 +66,7 @@ export const Board = () => {
       >
         {rows}
       </AutoLayout>
-      <PlayerBoard resultText="looser..." isBlack={false} />
+      <PlayerBoard resultText={whiteResultText} isBlack={false} />
     </AutoLayout>
   );
 };
