@@ -10,11 +10,13 @@ const Tile = ({
   status,
   rowIndex,
   colIndex,
+  isGameOver,
   onClick,
 }: {
   status: TileStatus;
   rowIndex: number;
   colIndex: number;
+  isGameOver: boolean;
   onClick: (rowIndex: number, colIndex: number) => void;
 }) => {
   const handleClick = () => onClick(rowIndex, colIndex);
@@ -46,7 +48,7 @@ const Tile = ({
         color: { r: 0.89, g: 0.64, b: 0.34, a: 1 },
       }}
       hoverStyle={{
-        fill: { r: 0.99, g: 0.84, b: 0.74, a: 1 },
+        fill: isGameOver ? undefined : { r: 0.99, g: 0.84, b: 0.74, a: 1 },
       }}
     >
       {renderTile(status)}

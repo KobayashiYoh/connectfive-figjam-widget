@@ -13,6 +13,7 @@ export const Board = () => {
     tileStatuses,
     blackResultText,
     whiteResultText,
+    isGameOver,
     handleTileClick,
     resetGame,
   } = useGame();
@@ -31,6 +32,7 @@ export const Board = () => {
           status={tileStatuses[row][col]}
           rowIndex={row}
           colIndex={col}
+          isGameOver={isGameOver}
           onClick={handleTileClick}
         />
       );
@@ -64,16 +66,18 @@ export const Board = () => {
         horizontalAlignItems="center"
         verticalAlignItems="center"
       >
-        <AutoLayout
-          onClick={resetGame}
-          direction="horizontal"
-          horizontalAlignItems="center"
-          verticalAlignItems="center"
-          padding={10}
-          fill={"#A052FE"}
-        >
-          <Text fill={"#FFFFFF"}>Continue</Text>
-        </AutoLayout>
+        {isGameOver && (
+          <AutoLayout
+            onClick={resetGame}
+            direction="horizontal"
+            horizontalAlignItems="center"
+            verticalAlignItems="center"
+            padding={10}
+            fill={"#A052FE"}
+          >
+            <Text fill={"#FFFFFF"}>Continue</Text>
+          </AutoLayout>
+        )}
         <AutoLayout
           direction="vertical"
           horizontalAlignItems="center"

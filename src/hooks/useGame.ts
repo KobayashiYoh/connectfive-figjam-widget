@@ -69,6 +69,7 @@ export const useGame = () => {
     tileStatuses,
     blackResultText,
     whiteResultText,
+    isGameOver,
     handleTileClick,
     resetGame,
   };
