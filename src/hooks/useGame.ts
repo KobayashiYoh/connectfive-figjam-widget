@@ -15,12 +15,17 @@ export const useGame = () => {
     initializeTileStatuses
   );
   const [isBlackTurn, setIsBlackTurn] = useSyncedState("isBlackTurn", true);
+  const [isGameOver, setIsGameOver] = useSyncedState("isGameOver", false);
 
   const switchTurn = () => {
     setIsBlackTurn(!isBlackTurn);
   };
 
   const handleTileClick = (rowIndex: number, colIndex: number) => {
+    if (isGameOver) {
+      return;
+    }
+
     console.log(`Tile clicked at ${rowIndex}, ${colIndex}`);
 
     const selectedStatus: TileStatus = tileStatuses[rowIndex][colIndex];

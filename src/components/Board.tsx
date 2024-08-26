@@ -2,6 +2,7 @@
 
 import { boardLength } from "../constants/gameConstants";
 import { useGame } from "../hooks/useGame";
+import { PlayerBoard } from "./PlayerBoard";
 import Tile from "./Tile";
 
 const { widget } = figma;
@@ -34,8 +35,8 @@ export const Board = () => {
         direction="horizontal"
         horizontalAlignItems="center"
         verticalAlignItems="center"
-        spacing={2}
-        padding={2}
+        spacing={1}
+        padding={1}
         width={boardSize}
         height={tileSize}
       >
@@ -46,16 +47,25 @@ export const Board = () => {
 
   return (
     <AutoLayout
-      direction="vertical"
+      direction="horizontal"
       horizontalAlignItems="center"
       verticalAlignItems="center"
-      spacing={2}
-      padding={0}
-      width={boardSize}
-      height={boardSize}
-      fill="#000000"
+      padding={10}
     >
-      {rows}
+      <PlayerBoard resultText="Winner!" isBlack={true} />
+      <AutoLayout
+        direction="vertical"
+        horizontalAlignItems="center"
+        verticalAlignItems="center"
+        spacing={2}
+        padding={0}
+        width={boardSize}
+        height={boardSize}
+        fill="#000000"
+      >
+        {rows}
+      </AutoLayout>
+      <PlayerBoard resultText="looser..." isBlack={false} />
     </AutoLayout>
   );
 };

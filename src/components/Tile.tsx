@@ -1,21 +1,10 @@
 /** @jsx figma.widget.h */
 
 import { TileStatus } from "../types/tileStatus";
+import { Stone } from "./Stone";
 
 const { widget } = figma;
-const { AutoLayout, Rectangle } = widget;
-
-const Stone = ({ isBlack }: { isBlack: boolean }) => (
-  <Rectangle
-    width={40}
-    height={40}
-    fill={{
-      type: "solid",
-      color: isBlack ? { r: 0, g: 0, b: 0, a: 1 } : { r: 1, g: 1, b: 1, a: 1 },
-    }}
-    cornerRadius={20}
-  />
-);
+const { AutoLayout } = widget;
 
 const Tile = ({
   status,
