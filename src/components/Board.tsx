@@ -2,13 +2,21 @@
 
 import { boardLength } from "../constants/gameConstants";
 import { useGame } from "../hooks/useGame";
+import { PlayerBoard } from "./PlayerBoard";
 import Tile from "./Tile";
 
 const { widget } = figma;
-const { AutoLayout } = widget;
+const { AutoLayout, Text } = widget;
 
 export const Board = () => {
-  const { tileStatuses, handleTileClick } = useGame();
+  const {
+    tileStatuses,
+    blackResultText,
+    whiteResultText,
+    isGameOver,
+    handleTileClick,
+    resetGame,
+  } = useGame();
 
   const tileSize = 42;
   const boardSize = boardLength * tileSize + 32;
@@ -24,6 +32,7 @@ export const Board = () => {
           status={tileStatuses[row][col]}
           rowIndex={row}
           colIndex={col}
+          isGameOver={isGameOver}
           onClick={handleTileClick}
         />
       );
@@ -34,8 +43,8 @@ export const Board = () => {
         direction="horizontal"
         horizontalAlignItems="center"
         verticalAlignItems="center"
-        spacing={2}
-        padding={2}
+        spacing={1}
+        padding={1}
         width={boardSize}
         height={tileSize}
       >
@@ -46,16 +55,42 @@ export const Board = () => {
 
   return (
     <AutoLayout
-      direction="vertical"
+      direction="horizontal"
       horizontalAlignItems="center"
       verticalAlignItems="center"
-      spacing={2}
-      padding={0}
-      width={boardSize}
-      height={boardSize}
-      fill="#000000"
+      padding={10}
     >
-      {rows}
+      <PlayerBoard resultText={blackResultText} isBlack={true} />
+      <AutoLayout
+        direction="vertical"
+        horizontalAlignItems="center"
+        verticalAlignItems="center"
+      >
+        {isGameOver && (
+          <AutoLayout
+            onClick={resetGame}
+            direction="horizontal"
+            horizontalAlignItems="center"
+            verticalAlignItems="center"
+            padding={10}
+            fill={"#A052FE"}
+          >
+            <Text fill={"#FFFFFF"}>Continue</Text>
+          </AutoLayout>
+        )}
+        <AutoLayout
+          direction="vertical"
+          horizontalAlignItems="center"
+          verticalAlignItems="center"
+          spacing={2}
+          width={boardSize}
+          height={boardSize}
+          fill="#000000"
+        >
+          {rows}
+        </AutoLayout>
+      </AutoLayout>
+      <PlayerBoard resultText={whiteResultText} isBlack={false} />
     </AutoLayout>
   );
 };

@@ -15,13 +15,32 @@ export const useGame = () => {
     initializeTileStatuses
   );
   const [isBlackTurn, setIsBlackTurn] = useSyncedState("isBlackTurn", true);
+  const [isGameOver, setIsGameOver] = useSyncedState("isGameOver", false);
+  const [blackResultText, setBlackResultText] = useSyncedState(
+    "blackResultText",
+    ""
+  );
+  const [whiteResultText, setWhiteResultText] = useSyncedState(
+    "whiteResultText",
+    ""
+  );
 
   const switchTurn = () => {
     setIsBlackTurn(!isBlackTurn);
   };
 
+  const resetGame = () => {
+    setTileStatuses(initializeTileStatuses);
+    setIsBlackTurn(true);
+    setIsGameOver(false);
+    setBlackResultText("");
+    setWhiteResultText("");
+  };
+
   const handleTileClick = (rowIndex: number, colIndex: number) => {
-    console.log(`Tile clicked at ${rowIndex}, ${colIndex}`);
+    if (isGameOver) {
+      return;
+    }
 
     const selectedStatus: TileStatus = tileStatuses[rowIndex][colIndex];
     if (isNotEmpty(selectedStatus)) {
@@ -34,13 +53,24 @@ export const useGame = () => {
 
     const tileStatus = currentTurnStatus(isBlackTurn);
     if (checkWin(newTileStatuses, rowIndex, colIndex, tileStatus)) {
-      console.log(`${isBlackTurn ? "黒" : "白"}の勝ちです！`);
+      setBlackResultText(`${isBlackTurn ? "Winner!" : "loser…"}`);
+      setWhiteResultText(`${isBlackTurn ? "loser…" : "Winner!"}`);
+      setIsGameOver(true);
     } else if (areAllTilesFilled(newTileStatuses)) {
-      console.log("引き分け");
+      setBlackResultText("draw");
+      setWhiteResultText("draw");
+      setIsGameOver(true);
     } else {
       switchTurn();
     }
   };
 
-  return { tileStatuses, handleTileClick };
+  return {
+    tileStatuses,
+    blackResultText,
+    whiteResultText,
+    isGameOver,
+    handleTileClick,
+    resetGame,
+  };
 };
