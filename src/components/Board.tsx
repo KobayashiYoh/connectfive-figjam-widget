@@ -6,7 +6,7 @@ import { PlayerBoard } from "./PlayerBoard";
 import Tile from "./Tile";
 
 const { widget } = figma;
-const { AutoLayout } = widget;
+const { AutoLayout, Text } = widget;
 
 export const Board = () => {
   const { tileStatuses, blackResultText, whiteResultText, handleTileClick } =
@@ -58,13 +58,28 @@ export const Board = () => {
         direction="vertical"
         horizontalAlignItems="center"
         verticalAlignItems="center"
-        spacing={2}
-        padding={0}
-        width={boardSize}
-        height={boardSize}
-        fill="#000000"
       >
-        {rows}
+        <AutoLayout
+          onClick={() => {}}
+          direction="horizontal"
+          horizontalAlignItems="center"
+          verticalAlignItems="center"
+          padding={10}
+          fill={"#A052FE"}
+        >
+          <Text fill={"#FFFFFF"}>Continue</Text>
+        </AutoLayout>
+        <AutoLayout
+          direction="vertical"
+          horizontalAlignItems="center"
+          verticalAlignItems="center"
+          spacing={2}
+          width={boardSize}
+          height={boardSize}
+          fill="#000000"
+        >
+          {rows}
+        </AutoLayout>
       </AutoLayout>
       <PlayerBoard resultText={whiteResultText} isBlack={false} />
     </AutoLayout>
