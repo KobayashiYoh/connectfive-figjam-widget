@@ -60,7 +60,11 @@ export const Board = () => {
       verticalAlignItems="center"
       padding={10}
     >
-      <PlayerBoard resultText={blackResultText} isBlack={true} />
+      <PlayerBoard
+        resultText={blackResultText}
+        playerName="Player1"
+        isBlack={true}
+      />
       <AutoLayout
         direction="vertical"
         horizontalAlignItems="center"
@@ -90,7 +94,11 @@ export const Board = () => {
           {rows}
         </AutoLayout>
       </AutoLayout>
-      <PlayerBoard resultText={whiteResultText} isBlack={false} />
+      <PlayerBoard
+        resultText={whiteResultText}
+        playerName="Player2"
+        isBlack={false}
+      />
     </AutoLayout>
   );
 };

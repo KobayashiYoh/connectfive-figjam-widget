@@ -7,26 +7,34 @@ const { AutoLayout, Text } = widget;
 
 interface PlayerBoardProps {
   resultText: string;
+  playerName: string;
   isBlack: boolean;
 }
 
-export const PlayerBoard = ({ resultText, isBlack }: PlayerBoardProps) => {
+export const PlayerBoard = ({
+  resultText,
+  playerName,
+  isBlack,
+}: PlayerBoardProps) => {
   return (
     <AutoLayout
       direction="vertical"
       horizontalAlignItems="center"
       verticalAlignItems="center"
+      spacing={8}
     >
-      <Text>{resultText}</Text>
+      <Text fontSize={18}>{resultText}</Text>
       <AutoLayout
         direction="vertical"
         horizontalAlignItems="center"
         verticalAlignItems="center"
         fill={"#A052FE"}
-        padding={32}
+        padding={{ vertical: 24, horizontal: 16 }}
+        cornerRadius={8}
+        spacing={8}
       >
         <Stone isBlack={isBlack} />
-        <Text fill="#FFFFFF">{isBlack ? "Player1" : "Player2"}</Text>
+        <Text fill="#FFFFFF">{playerName}</Text>
       </AutoLayout>
     </AutoLayout>
   );
