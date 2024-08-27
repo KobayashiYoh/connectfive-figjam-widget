@@ -8,7 +8,13 @@ const { widget } = figma;
 const { AutoLayout, Text } = widget;
 
 export const GameScreen = () => {
-  const { blackResultText, whiteResultText, isGameOver, resetGame } = useGame();
+  const {
+    blackResultText,
+    whiteResultText,
+    isBlackTurn,
+    isGameOver,
+    resetGame,
+  } = useGame();
 
   return (
     <AutoLayout
@@ -21,6 +27,7 @@ export const GameScreen = () => {
         resultText={blackResultText}
         playerName="Player1"
         isBlack={true}
+        isCurrentTurn={isBlackTurn}
       />
       <AutoLayout
         direction="vertical"
@@ -46,6 +53,7 @@ export const GameScreen = () => {
         resultText={whiteResultText}
         playerName="Player2"
         isBlack={false}
+        isCurrentTurn={!isBlackTurn}
       />
     </AutoLayout>
   );

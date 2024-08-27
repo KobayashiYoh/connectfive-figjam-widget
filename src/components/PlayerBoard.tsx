@@ -9,12 +9,14 @@ interface PlayerBoardProps {
   resultText: string;
   playerName: string;
   isBlack: boolean;
+  isCurrentTurn: boolean;
 }
 
 export const PlayerBoard = ({
   resultText,
   playerName,
   isBlack,
+  isCurrentTurn,
 }: PlayerBoardProps) => {
   return (
     <AutoLayout
@@ -36,6 +38,7 @@ export const PlayerBoard = ({
         <Stone isBlack={isBlack} />
         <Text fill="#FFFFFF">{playerName}</Text>
       </AutoLayout>
+      <Text>{isCurrentTurn ? "Your turn" : ""}</Text>
     </AutoLayout>
   );
 };
