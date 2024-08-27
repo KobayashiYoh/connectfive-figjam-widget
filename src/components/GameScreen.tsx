@@ -16,6 +16,8 @@ export const GameScreen = () => {
     resetGame,
   } = useGame();
 
+  const continueButtonHeight = 48;
+
   return (
     <AutoLayout
       direction="horizontal"
@@ -35,7 +37,7 @@ export const GameScreen = () => {
         verticalAlignItems="center"
         spacing={16}
       >
-        {isGameOver && (
+        {isGameOver ? (
           <AutoLayout
             onClick={resetGame}
             horizontalAlignItems="center"
@@ -43,9 +45,12 @@ export const GameScreen = () => {
             fill={"#A052FE"}
             cornerRadius={8}
             padding={16}
+            height={continueButtonHeight}
           >
             <Text fill={"#FFFFFF"}>Continue</Text>
           </AutoLayout>
+        ) : (
+          <AutoLayout height={continueButtonHeight} />
         )}
         <Board />
       </AutoLayout>
