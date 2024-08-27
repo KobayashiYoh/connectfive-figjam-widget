@@ -58,7 +58,7 @@ export const Board = () => {
       direction="horizontal"
       horizontalAlignItems="center"
       verticalAlignItems="center"
-      padding={10}
+      spacing={32}
     >
       <PlayerBoard
         resultText={blackResultText}
@@ -69,15 +69,16 @@ export const Board = () => {
         direction="vertical"
         horizontalAlignItems="center"
         verticalAlignItems="center"
+        spacing={16}
       >
         {isGameOver && (
           <AutoLayout
             onClick={resetGame}
-            direction="horizontal"
             horizontalAlignItems="center"
             verticalAlignItems="center"
-            padding={10}
             fill={"#A052FE"}
+            cornerRadius={8}
+            padding={16}
           >
             <Text fill={"#FFFFFF"}>Continue</Text>
           </AutoLayout>
@@ -86,7 +87,7 @@ export const Board = () => {
           direction="vertical"
           horizontalAlignItems="center"
           verticalAlignItems="center"
-          spacing={2}
+          spacing={1}
           width={boardSize}
           height={boardSize}
           fill="#000000"
