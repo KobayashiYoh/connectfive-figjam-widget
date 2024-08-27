@@ -10,15 +10,14 @@ interface StoneProps {
 export const Stone = ({ isBlack }: StoneProps) => {
   return (
     <Rectangle
-      width={40}
-      height={40}
+      width={32}
+      height={32}
       fill={{
         type: "solid",
-        color: isBlack
-          ? { r: 0, g: 0, b: 0, a: 1 }
-          : { r: 1, g: 1, b: 1, a: 1 },
+        color: isBlack ? "#000000" : "#FFFFFF",
       }}
       cornerRadius={20}
+      
     />
   );
 };

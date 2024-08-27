@@ -10,8 +10,8 @@ const { AutoLayout } = widget;
 export const Board = () => {
   const { tileStatuses, isGameOver, handleTileClick } = useGame();
 
-  const tileSize = 42;
-  const boardSize = boardLength * tileSize + 32;
+  const tileSize = 36;
+  const boardSize = (boardLength * tileSize);
 
   const rows = [];
   for (let row = 1; row < boardLength - 1; row++) {
@@ -51,8 +51,7 @@ export const Board = () => {
       horizontalAlignItems="center"
       verticalAlignItems="center"
       spacing={1}
-      width={boardSize}
-      height={boardSize}
+      padding={4}
       fill="#000000"
     >
       {rows}
