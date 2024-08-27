@@ -2,24 +2,16 @@
 
 import { boardLength } from "../constants/gameConstants";
 import { useGame } from "../hooks/useGame";
-import { PlayerBoard } from "./PlayerBoard";
 import Tile from "./Tile";
 
 const { widget } = figma;
-const { AutoLayout, Text } = widget;
+const { AutoLayout } = widget;
 
 export const Board = () => {
-  const {
-    tileStatuses,
-    blackResultText,
-    whiteResultText,
-    isGameOver,
-    handleTileClick,
-    resetGame,
-  } = useGame();
+  const { tileStatuses, isGameOver, handleTileClick } = useGame();
 
-  const tileSize = 42;
-  const boardSize = boardLength * tileSize + 32;
+  const tileSize = 36;
+  const boardSize = (boardLength * tileSize);
 
   const rows = [];
   for (let row = 1; row < boardLength - 1; row++) {
@@ -55,42 +47,14 @@ export const Board = () => {
 
   return (
     <AutoLayout
-      direction="horizontal"
+      direction="vertical"
       horizontalAlignItems="center"
       verticalAlignItems="center"
-      padding={10}
+      spacing={1}
+      padding={4}
+      fill="#000000"
     >
-      <PlayerBoard resultText={blackResultText} isBlack={true} />
-      <AutoLayout
-        direction="vertical"
-        horizontalAlignItems="center"
-        verticalAlignItems="center"
-      >
-        {isGameOver && (
-          <AutoLayout
-            onClick={resetGame}
-            direction="horizontal"
-            horizontalAlignItems="center"
-            verticalAlignItems="center"
-            padding={10}
-            fill={"#A052FE"}
-          >
-            <Text fill={"#FFFFFF"}>Continue</Text>
-          </AutoLayout>
-        )}
-        <AutoLayout
-          direction="vertical"
-          horizontalAlignItems="center"
-          verticalAlignItems="center"
-          spacing={2}
-          width={boardSize}
-          height={boardSize}
-          fill="#000000"
-        >
-          {rows}
-        </AutoLayout>
-      </AutoLayout>
-      <PlayerBoard resultText={whiteResultText} isBlack={false} />
+      {rows}
     </AutoLayout>
   );
 };

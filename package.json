@@ -22,7 +22,6 @@
     "containsWidget": true,
     "id": "connectfive",
     "name": "Connectfive",
-    "main": "src/main.tsx",
-    "ui": "src/ui.tsx"
+    "main": "src/main.tsx"
   }
 }
