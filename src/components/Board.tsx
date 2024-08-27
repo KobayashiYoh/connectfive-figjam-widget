@@ -2,21 +2,13 @@
 
 import { boardLength } from "../constants/gameConstants";
 import { useGame } from "../hooks/useGame";
-import { PlayerBoard } from "./PlayerBoard";
 import Tile from "./Tile";
 
 const { widget } = figma;
-const { AutoLayout, Text } = widget;
+const { AutoLayout } = widget;
 
 export const Board = () => {
-  const {
-    tileStatuses,
-    blackResultText,
-    whiteResultText,
-    isGameOver,
-    handleTileClick,
-    resetGame,
-  } = useGame();
+  const { tileStatuses, isGameOver, handleTileClick } = useGame();
 
   const tileSize = 42;
   const boardSize = boardLength * tileSize + 32;
@@ -55,51 +47,15 @@ export const Board = () => {
 
   return (
     <AutoLayout
-      direction="horizontal"
+      direction="vertical"
       horizontalAlignItems="center"
       verticalAlignItems="center"
-      spacing={32}
+      spacing={1}
+      width={boardSize}
+      height={boardSize}
+      fill="#000000"
     >
-      <PlayerBoard
-        resultText={blackResultText}
-        playerName="Player1"
-        isBlack={true}
-      />
-      <AutoLayout
-        direction="vertical"
-        horizontalAlignItems="center"
-        verticalAlignItems="center"
-        spacing={16}
-      >
-        {isGameOver && (
-          <AutoLayout
-            onClick={resetGame}
-            horizontalAlignItems="center"
-            verticalAlignItems="center"
-            fill={"#A052FE"}
-            cornerRadius={8}
-            padding={16}
-          >
-            <Text fill={"#FFFFFF"}>Continue</Text>
-          </AutoLayout>
-        )}
-        <AutoLayout
-          direction="vertical"
-          horizontalAlignItems="center"
-          verticalAlignItems="center"
-          spacing={1}
-          width={boardSize}
-          height={boardSize}
-          fill="#000000"
-        >
-          {rows}
-        </AutoLayout>
-      </AutoLayout>
-      <PlayerBoard
-        resultText={whiteResultText}
-        playerName="Player2"
-        isBlack={false}
-      />
+      {rows}
     </AutoLayout>
   );
 };
