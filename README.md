@@ -1,6 +1,7 @@
-# Connectfive
+# Connectfive FigJam Widget
 This is FigJam Widget of Connect Five as published on Figma Community.
-<img width="1440" alt="スクリーンショット 2024-09-19 21 09 29" src="https://github.com/user-attachments/assets/7d0b730b-a508-4cb2-aa90-92b908ac89e4">
+
+<img width="908" alt="スクリーンショット 2024-09-19 21 38 39" src="https://github.com/user-attachments/assets/ae38db2d-f76d-4015-a7c8-78a317dfc80f">
 
 ## URL
 https://www.figma.com/community/widget/1410322967944300600
