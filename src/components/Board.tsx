@@ -10,14 +10,19 @@ const { AutoLayout } = widget;
 export const Board = () => {
   const { tileStatuses, isGameOver, handleTileClick } = useGame();
 
-  const tileSize = 36;
-  const boardSize = (boardLength * tileSize);
+  const tileSize = 40;
+  const boardSize = (boardLength - 2) * tileSize;
 
   const rows = [];
   for (let row = 1; row < boardLength - 1; row++) {
     const rowTiles = [];
     for (let col = 1; col < boardLength - 1; col++) {
       const key = `${row}-${col}`;
+      const isTopEdge = row === 1;
+      const isBottomEdge = row === boardLength - 2;
+      const isLeftEdge = col === 1;
+      const isRightEdge = col === boardLength - 2;
+
       rowTiles.push(
         <Tile
           key={key}
@@ -26,6 +31,10 @@ export const Board = () => {
           colIndex={col}
           isGameOver={isGameOver}
           onClick={handleTileClick}
+          isTopEdge={isTopEdge}
+          isBottomEdge={isBottomEdge}
+          isLeftEdge={isLeftEdge}
+          isRightEdge={isRightEdge}
         />
       );
     }
@@ -35,8 +44,7 @@ export const Board = () => {
         direction="horizontal"
         horizontalAlignItems="center"
         verticalAlignItems="center"
-        spacing={1}
-        padding={1}
+        spacing={0}
         width={boardSize}
         height={tileSize}
       >
@@ -50,9 +58,12 @@ export const Board = () => {
       direction="vertical"
       horizontalAlignItems="center"
       verticalAlignItems="center"
-      spacing={1}
-      padding={4}
-      fill="#000000"
+      spacing={0}
+      padding={20}
+      fill={{
+        type: "solid",
+        color: { r: 0.89, g: 0.64, b: 0.34, a: 1 },
+      }}
     >
       {rows}
     </AutoLayout>
