@@ -4,7 +4,7 @@ import { TileStatus } from "../types/tileStatus";
 import { Stone } from "./Stone";
 
 const { widget } = figma;
-const { AutoLayout } = widget;
+const { AutoLayout, Rectangle, Frame } = widget;
 
 const Tile = ({
   status,
@@ -12,12 +12,20 @@ const Tile = ({
   colIndex,
   isGameOver,
   onClick,
+  isTopEdge,
+  isBottomEdge,
+  isLeftEdge,
+  isRightEdge,
 }: {
   status: TileStatus;
   rowIndex: number;
   colIndex: number;
   isGameOver: boolean;
   onClick: (rowIndex: number, colIndex: number) => void;
+  isTopEdge: boolean;
+  isBottomEdge: boolean;
+  isLeftEdge: boolean;
+  isRightEdge: boolean;
 }) => {
   const handleClick = () => onClick(rowIndex, colIndex);
 
@@ -33,24 +41,69 @@ const Tile = ({
     }
   };
 
+  const lineColor = { r: 0.2, g: 0.2, b: 0.2, a: 1 };
+  const lineWidth = 2;
+  const tileSize = 40;
+
+  const verticalLineHeight =
+    isTopEdge && isBottomEdge
+      ? lineWidth
+      : isTopEdge
+      ? tileSize / 2
+      : isBottomEdge
+      ? tileSize / 2
+      : tileSize;
+  const verticalLineY = isTopEdge ? tileSize / 2 : 0;
+
+  const horizontalLineWidth =
+    isLeftEdge && isRightEdge
+      ? lineWidth
+      : isLeftEdge
+      ? tileSize / 2
+      : isRightEdge
+      ? tileSize / 2
+      : tileSize;
+  const horizontalLineX = isLeftEdge ? tileSize / 2 : 0;
+
   return (
-    <AutoLayout
-      direction="vertical"
-      horizontalAlignItems="center"
-      verticalAlignItems="center"
-      width={40}
-      height={40}
-      onClick={handleClick}
-      fill={{
-        type: "solid",
-        color: { r: 0.89, g: 0.64, b: 0.34, a: 1 },
-      }}
-      hoverStyle={{
-        fill: isGameOver ? undefined : { r: 0.99, g: 0.84, b: 0.74, a: 1 },
-      }}
-    >
-      {renderTile(status)}
-    </AutoLayout>
+    <Frame width={tileSize} height={tileSize} onClick={handleClick}>
+      <Rectangle
+        width={lineWidth}
+        height={verticalLineHeight}
+        x={tileSize / 2 - lineWidth / 2}
+        y={verticalLineY}
+        fill={lineColor}
+      />
+      <Rectangle
+        width={horizontalLineWidth}
+        height={lineWidth}
+        x={horizontalLineX}
+        y={tileSize / 2 - lineWidth / 2}
+        fill={lineColor}
+      />
+      <Rectangle
+        width={tileSize}
+        height={tileSize}
+        x={0}
+        y={0}
+        fill={{ r: 0.99, g: 0.84, b: 0.74, a: 0 }}
+        hoverStyle={{
+          fill: isGameOver ? undefined : { r: 0.99, g: 0.84, b: 0.74, a: 0.4 },
+        }}
+      />
+      {(status === TileStatus.Black || status === TileStatus.White) && (
+        <AutoLayout
+          width={tileSize}
+          height={tileSize}
+          horizontalAlignItems="center"
+          verticalAlignItems="center"
+          x={0}
+          y={0}
+        >
+          {renderTile(status)}
+        </AutoLayout>
+      )}
+    </Frame>
   );
 };
 
